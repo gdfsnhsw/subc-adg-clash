@@ -42,10 +42,10 @@ COPY scripts/* /usr/lib/clash/
 
 # RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
-WORKDIR /src
 RUN set -eux; \
     buildDeps=" \
-        jq \
+    	jq \
+        npm \
         git \
         autoconf \
         automake \
@@ -53,6 +53,7 @@ RUN set -eux; \
         help2man \
         build-base \
         bash \
+	nftables \
         iproute2 \
         ip6tables \
         iptables \
@@ -60,34 +61,27 @@ RUN set -eux; \
     runDeps=" \
         bash \
         iproute2 \
-        ip6tables \
-        iptables \
-        ipset \
-        libcap \
-        # for debug
+	nftables \
+        ca-certificates \
+        tini \
+        nodejs \
+	libcap \
         curl \
         bind-tools \
         bash-doc \
         bash-completion \
-	unzip \
-        # eudev \
     "; \
     \
     apk add --no-cache --virtual .build-deps \
         $buildDeps \
         $runDeps \
     ; \
-    \
-    make; \
-    make install; \
-    \
+    npm install -g pm2; \
     \
     apk add --no-network --virtual .run-deps \
         $runDeps \
     ; \
     apk del .build-deps; \
-    rm -rf /src; \
-    \
     \
     # clash
     \
