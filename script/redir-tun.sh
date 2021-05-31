@@ -1,24 +1,8 @@
 #!/bin/bash
 
-function assert() {
-    "$@"
-
-    if [ "$?" != 0 ]; then
-    echo "Execute $@ failure"
-    exit 1
-    fi
-}
-
-function assert_command() {
-    if ! which "$1" > /dev/null 2>&1;then
-    echo "Command $1 not found"
-    exit 1
-    fi
-}
-
 function _setup(){
-    . /etc/default/clash
-
+    . /usr/lib/clash/common.sh
+    
     ip route replace default dev utun table "$IPROUTE2_TABLE_ID"
 
     ip rule del fwmark "$NETFILTER_MARK" lookup "$IPROUTE2_TABLE_ID" > /dev/null 2> /dev/null
