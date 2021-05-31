@@ -19,12 +19,9 @@ function assert_command() {
 function _setup(){
     . /usr/lib/clash/common.sh
     
-    lsmod | grep tun > /dev/null
-    if [ $? != 0 ]; then
-        ip tuntap add utun mode tun user root
-        ip link set utun up
-        ip addr add "198.19.0.1/16" dev utun
-    fi
+    ip tuntap add utun mode tun user root
+    ip link set utun up
+    ip addr add "198.19.0.1/16" dev utun
     
     ip route replace default dev utun table "$IPROUTE2_TABLE_ID"
 
