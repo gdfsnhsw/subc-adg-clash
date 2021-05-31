@@ -15,7 +15,7 @@ services:
       - ./clash_config:/clash_config
     environment:
       - TZ=Asia/Shanghai
-      - EN_MODE=redir-host
+      - DNS_MODE=fake-ip
       - ROUTE_MODE=redir-tun
     cap_add:
       - NET_ADMIN
