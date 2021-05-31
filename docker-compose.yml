@@ -2,7 +2,7 @@ version: '3.2'
 services:
   clash-tproxy:
     container_name: clash
-    image: gdfsnhsw/clash-tproxy:premium-latest
+    image: gdfsnhsw/subc-adg-clash:latest
     logging:
       options:
         max-size: '10m'
