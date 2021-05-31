@@ -2,9 +2,9 @@
 
 set -e
 
-if [ "$EN_MODE_TUN" = "tun"]; then
+if [ "$ROUTE_MODE" = "tun"]; then
     /usr/lib/clash/tun.sh &
-elif [ "$EN_MODE_TUN" = "tproxy" ]; then
+elif [ "$ROUTE_MODE" = "tproxy" ]; then
     /usr/lib/clash/tproxy.sh &
 else
     /usr/lib/clash/redir-tun.sh &
