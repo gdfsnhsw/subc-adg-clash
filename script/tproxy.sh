@@ -17,7 +17,7 @@ function assert_command() {
 }
 
 function _setup(){
-    . /etc/default/clash
+    . /usr/lib/clash/common.sh
 
     ip route replace local default dev lo table "$IPROUTE2_TABLE_ID"
 
