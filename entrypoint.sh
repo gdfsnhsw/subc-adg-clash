@@ -2,11 +2,12 @@
 
 set -e
 
-if [ -n "$EN_MODE_TUN" ]; then
-    #TUN模式
-    /usr/lib/clash/setup-redir-tun.sh &
+if [ "$EN_MODE_TUN" = "tun"]; then
+    /usr/lib/clash/tun.sh &
+elif [ "$EN_MODE_TUN" = "tproxy" ]; then
+    /usr/lib/clash/tproxy.sh &
 else
-    /usr/lib/clash/setup-tproxy.sh &
+    /usr/lib/clash/redir-tun.sh &
 fi
 
 # 开启转发，需要 privileged
