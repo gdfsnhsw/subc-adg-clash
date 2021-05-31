@@ -2,9 +2,9 @@
 
 set -e
 
-if [ "$ROUTE_MODE" = "tun"]; then
+if [ "$ROUTE_MODE" = "tun"]&&[ "$DNS_MODE" = "fake-ip"]; then
     /usr/lib/clash/tun.sh &
-elif [ "$ROUTE_MODE" = "tproxy" ]; then
+elif [ "$ROUTE_MODE" = "tproxy" ]&&[ "$DNS_MODE" = "redir_host"]; then
     /usr/lib/clash/tproxy.sh &
 else
     /usr/lib/clash/redir-tun.sh &
