@@ -61,10 +61,10 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/SAClash-latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/SAClash-${{ steps.version.outputs.result }}
-            ghcr.io/gdfsnhsw/SAClash-latest
-            ghcr.io/gdfsnhsw/SAClash-${{ steps.version.outputs.result }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/saclash-latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/saclash-${{ steps.version.outputs.result }}
+            ghcr.io/gdfsnhsw/saclash-latest
+            ghcr.io/gdfsnhsw/saclash-${{ steps.version.outputs.result }}
           cache-from: type=local,src=/tmp/.buildx-cache
           # first run does not export the cache
 
@@ -79,9 +79,9 @@ jobs:
           platforms: linux/arm64,linux/arm/v7,linux/amd64
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/SAClash-latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/SAClash-${{ steps.version.outputs.result }}
-            ghcr.io/gdfsnhsw/SAClash-latest
-            ghcr.io/gdfsnhsw/SAClash-${{ steps.version.outputs.result }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/saclash-latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/saclash-${{ steps.version.outputs.result }}
+            ghcr.io/gdfsnhsw/saclash-latest
+            ghcr.io/gdfsnhsw/saclash-${{ steps.version.outputs.result }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
