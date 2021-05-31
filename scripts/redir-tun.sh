@@ -21,7 +21,7 @@ function _setup(){
     
     ip tuntap add utun mode tun user root
     ip link set utun up
-    ip addr add "198.19.0.1/16" dev utun
+    ip addr add "198.18.0.1/16" dev utun
     
     ip route replace default dev utun table "$IPROUTE2_TABLE_ID"
 
