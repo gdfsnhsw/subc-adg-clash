@@ -44,7 +44,8 @@ function _setup(){
         }
     }
 EOF
-    sysctl -w net/ipv4/ip_forward=1
+
+#    sysctl -w net/ipv4/ip_forward=1
 
     exit 0
 }
