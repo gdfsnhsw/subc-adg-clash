@@ -3,10 +3,13 @@
 set -e
 
 if [ "$ROUTE_MODE" = "tun"]; then
+    echo "Transfer TCP and UDP to utun device"
     /usr/lib/clash/tun.sh setup &
 elif [ "$ROUTE_MODE" = "tproxy" ]; then
+    echo "TProxy TCP and TProxy UDP"
     /usr/lib/clash/tproxy.sh setup &
 else
+    echo "Redirect TCP and transfer UDP to utun device"
     /usr/lib/clash/redir-tun.sh setup &
 fi
 
