@@ -16,7 +16,7 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - EN_MODE=redir-host
-      - EN_MODE_TUN=1
+      - ROUTE_MODE=redir-tun
     cap_add:
       - NET_ADMIN
       - SYS_ADMIN
