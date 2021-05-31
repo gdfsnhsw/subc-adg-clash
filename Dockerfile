@@ -25,10 +25,9 @@ RUN set -eux; \
     unzip gh-pages.zip; 
     
 FROM --platform=$TARGETPLATFORM alpine AS runtime
-LABEL org.opencontainers.image.source https://gdfsnhsw@github.com/gdfsnhsw/clash-tproxy.git
+LABEL org.opencontainers.image.source https://gdfsnhsw@github.com/gdfsnhsw/subc-adg-clash.git
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
-ARG FIREQOS_VERSION=latest
 
 # RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.11/main/" > /etc/apk/repositories
 
@@ -40,12 +39,9 @@ COPY --from=builder /go/clash-dashboard-gh-pages/assets/* /root/.config/clash/da
 COPY config.yaml.example /root/.config/clash/config.yaml
 COPY entrypoint.sh /usr/local/bin/
 COPY scripts/* /usr/lib/clash/
-COPY fireqos.conf /etc/firehol/fireqos.conf
 
 # RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
-# fireqos
-## iprange
 WORKDIR /src
 RUN set -eux; \
     buildDeps=" \
@@ -82,44 +78,9 @@ RUN set -eux; \
         $runDeps \
     ; \
     \
-    \
-    git clone https://github.com/firehol/iprange; \
-    cd iprange; \
-    ./autogen.sh; \
-    ./configure \
-		--prefix=/usr \
-		--sysconfdir=/etc/ssh \
-		--datadir=/usr/share/openssh \
-		--libexecdir=/usr/lib/ssh \
-		--disable-man \
-		--enable-maintainer-mode \
-    ; \
     make; \
     make install; \
     \
-    \
-    ## fireqos
-    \
-    cd /src; \
-    git clone https://github.com/firehol/firehol; \
-    cd firehol; \
-    tag=${FIREQOS_VERSION:-latest}; \
-    if [ "${tag}" = "latest" ]; then tag=$(curl -L --silent https://api.github.com/repos/firehol/firehol/releases/latest | jq -r .tag_name); fi; \
-    git checkout $tag; \
-    ./autogen.sh; \
-    ./configure \
-        CHMOD=chmod \
-		--prefix=/usr \
-		--sysconfdir=/etc \
-		--disable-firehol \
-		--disable-link-balancer \
-		--disable-update-ipsets \
-		--disable-vnetbuild \
-        --disable-doc \
-        --disable-man \
-    ; \
-    make; \
-    make install; \
     \
     apk add --no-network --virtual .run-deps \
         $runDeps \
