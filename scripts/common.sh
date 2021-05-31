@@ -15,4 +15,4 @@ readonly IPROUTE2_TABLE_ID=100
 readonly FORWARD_DNS_REDIRECT=:1053
 
 # tproxy (TProxy TCP and TProxy UDP) or Redir (Redirect TCP and TProxy UDP)
-readonly FORWARD_PROXY_REDIRECT=:7893
+readonly FORWARD_PROXY_REDIRECT=:7892
