@@ -1,5 +1,21 @@
 #!/bin/bash
 
+function assert() {
+    "$@"
+
+    if [ "$?" != 0 ]; then
+    echo "Execute $@ failure"
+    exit 1
+    fi
+}
+
+function assert_command() {
+    if ! which "$1" > /dev/null 2>&1;then
+    echo "Command $1 not found"
+    exit 1
+    fi
+}
+
 function _setup(){
     . /usr/lib/clash/common.sh
     
