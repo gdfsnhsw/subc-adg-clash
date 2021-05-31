@@ -2,12 +2,12 @@
 
 set -e
 
-if [ "$ROUTE_MODE" = "tun"]&&[ "$DNS_MODE" = "fake-ip"]; then
-    /usr/lib/clash/tun.sh &
-elif [ "$ROUTE_MODE" = "tproxy" ]&&[ "$DNS_MODE" = "redir_host"]; then
-    /usr/lib/clash/tproxy.sh &
+if [ "$ROUTE_MODE" = "tun"]; then
+    /usr/lib/clash/tun.sh setup &
+elif [ "$ROUTE_MODE" = "tproxy" ]; then
+    /usr/lib/clash/tproxy.sh setup &
 else
-    /usr/lib/clash/redir-tun.sh &
+    /usr/lib/clash/redir-tun.sh setup &
 fi
 
 # 开启转发，需要 privileged
