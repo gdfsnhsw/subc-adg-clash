@@ -45,7 +45,6 @@ COPY scripts/* /usr/lib/clash/
 RUN set -eux; \
     buildDeps=" \
     	jq \
-        npm \
         git \
         autoconf \
         automake \
@@ -64,7 +63,6 @@ RUN set -eux; \
 	nftables \
         ca-certificates \
         tini \
-        nodejs \
 	libcap \
         curl \
         bind-tools \
@@ -76,7 +74,6 @@ RUN set -eux; \
         $buildDeps \
         $runDeps \
     ; \
-    npm install -g pm2; \
     \
     apk add --no-network --virtual .run-deps \
         $runDeps \
