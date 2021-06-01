@@ -34,6 +34,4 @@ if [ ! -e '/clash_config/Country.mmdb' ]; then
     cp  /root/.config/clash/Country.mmdb /clash_config/Country.mmdb
 fi
 
-pm2-docker start clash --name clash
-
 exec "$@"
